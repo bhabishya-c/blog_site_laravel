@@ -1,6 +1,3 @@
-@if(Auth::user()->role!='admin')
-{{'login'}}
-@else
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -129,5 +126,4 @@
     </body>
 </html>
 
-@endif
 
