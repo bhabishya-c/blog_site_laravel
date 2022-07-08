@@ -2,7 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\LoginValidate;
+use App\Http\Middleware\PostValidation;
+use App\Http\Middleware\RegistrationValidation;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LogoutController;
 
 
 /*
@@ -16,6 +21,8 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/',[LoginController::class,'loginform']);
-Route::post('/login',[LoginController::class,'login'])->middleware('loginvalidate');
+Route::get('/',[LoginController::class,'create']);
+Route::post('/login',[LoginController::class,'store'])->middleware('loginvalidate');
+
+
 
