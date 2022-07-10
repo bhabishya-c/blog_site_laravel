@@ -28,7 +28,7 @@
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/adminhome">Home</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/adminform">Add blog</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/signup">Add user</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/adduserform">Add user</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/logout">Logout</a></li>
                     </ul>
                 </div>
@@ -67,12 +67,12 @@
                         <form action="/deletepost" method="post" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <input type="hidden" name="id" value="{{$a->post_id}}">
+                        {{-- <input type="hidden" name="id" value="{{$a->user_id}}"> --}}
                         <input type="submit" class="btn btn-info btn-md" value="Delete" style="border-radius:50px;">
                         </form>
                         <form action="/admincontent" method="get" style="display:inline;">
                         @csrf
-                        <input type="hidden" name="id" value="{{$a->post_id}}">
+                        {{-- <input type="hidden" name="id" value="{{$a->user_id}}"> --}}
                         <input type="submit" class="btn btn-info btn-md" value="Readmore" style="border-radius:50px;"><br>
                         </form>
                     </div>

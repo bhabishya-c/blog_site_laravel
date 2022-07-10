@@ -66,13 +66,13 @@
                         <form action="/deletepost" method="post" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <input type="hidden" name="id" value="{{$u->id}}">
+                            {{-- <input type="hidden" name="id" value="{{$u->id}}"> --}}
                             <input type="submit" class="btn btn-info btn-md" value="Delete" style="border-radius:50px;">
                             </form>
                             @endif
                             <form action="/admincontent" method="get" style="display:inline;">
                             @csrf
-                            <input type="hidden" name="id" value="{{$u->id}}">
+                            {{-- <input type="hidden" name="id" value="{{$u->id}}"> --}}
                             <input type="submit" class="btn btn-info btn-md" value="Readmore" style="border-radius:50px;"><br>
                             </form>
                     </div>
