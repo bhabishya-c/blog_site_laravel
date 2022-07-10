@@ -20,9 +20,19 @@ use App\Http\Controllers\LogoutController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/adminhome',[PostController::class,'adminindex']);
+Route::get('/userhome',[PostController::class,'userindex']);
 Route::get('/',[LoginController::class,'create']);
 Route::post('/login',[LoginController::class,'store'])->middleware('loginvalidate');
+Route::get('/adduserform',[RegisterController::class,'create']);
+Route::post('/adduser',[RegisterController::class,'store'])->middleware('registervalidate');
+Route::get('/adminform',[PostController::class,'admincreate']);
+Route::get('/userform',[PostController::class,'usercreate']);
+Route::get('/logout',[LogoutController::class,'logout']);
 
+Route::middleware(['postvalidate'])->group(function(){
+    Route::post('/adminpost',[PostController::class,'store']);
+    Route::post('/userpost',[PostController::class,'store']);
+});
 
 

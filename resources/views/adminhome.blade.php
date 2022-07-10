@@ -27,7 +27,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/adminhome">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/adminpostform">Add blog</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/adminform">Add blog</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/signup">Add user</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/logout">Logout</a></li>
                     </ul>
@@ -49,11 +49,12 @@
         </header>
         <!-- Main Content-->
         @isset($admindisplay)
-        @foreach($admindisplay as $a)
+        @foreach($admindisplay as $admin)
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
+                    @foreach($admin->posts as $a)
                     <div class="post-preview">
                     <h2 class="post-title">{{$a->title}}</h2>
                         <div class="container" style="height: 65px;;width:auto;overflow:hidden;">
@@ -61,7 +62,7 @@
                     </div>
                     </a>
                         <p class="post-meta">
-                            Posted on: {{$a->created_at}} 
+                            Posted on: {{$a->created_at}} by {{ $admin->name }} 
                         </p>
                         <form action="/deletepost" method="post" style="display:inline;">
                         @csrf
@@ -77,6 +78,7 @@
                     </div>
                      <!-- Divider-->
                     <hr class="my-4" />
+                    @endforeach
 </div>
 </div>
 </div>

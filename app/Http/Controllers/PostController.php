@@ -1,19 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 
-class LoginController extends Controller
+use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Post;
+
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function adminindex()
     {
-        //
+        $post=User::with('posts')->get();
+        return view('adminhome')->with('admindisplay',$post);
+    }
+    public function userindex()
+    {
+        $post=User::with('posts')->orderBy('id','desc')->get();
+        return view('userhome')->with('userdisplay',$post);
     }
 
     /**
@@ -21,9 +29,13 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function admincreate()
     {
-        return view('login');
+        return view('adminaddpost');
+    }
+    public function usercreate()
+    {
+        return view('useraddpost');
     }
 
     /**
@@ -34,21 +46,16 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        $email=$request->email;
-        $password=$request->password;
-        if(Auth::attempt(['email' => $email, 'password' => $password,'role'=>'admin'])) {
-        $request->session()->regenerate();
-        return redirect('/adminhome');
-    }
-       elseif (Auth::attempt(['email' => $email, 'password' => $password,'role'=>'user'])) {
-       $request->session()->regenerate();
-       return redirect('/userhome');
-    }elseif(Auth::attempt(['email'=>!$email,'password'=>$password])){
-       return redirect('/')->with('emailerror',"Entered email is wrong");
-     }
-     else{
-     return redirect('/')->with('error',"Entered email or password is wrong");
- }
+        $addpost=Post::create([
+            'user_id'=>$request->id,
+            'title'=>$request->title,
+            'content'=>$request->content,
+            ]);
+            if($addpost){
+                return redirect()->back()->with('addpostsuccess','Post has been added successfully');
+            }else{
+                return redirect()->back()->with('addposterror','Failed to add post');
+            }
     }
 
     /**
@@ -59,7 +66,7 @@ class LoginController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**

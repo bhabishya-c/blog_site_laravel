@@ -43,6 +43,9 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        'postvalidate'=>[
+            \App\Http\Middleware\PostValidation::class,
+        ],
     ];
 
     /**
@@ -64,5 +67,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'loginvalidate'=>\App\Http\Middleware\LoginValidate::class,
+        'registervalidate'=>\App\Http\Middleware\RegistrationValidation::class,
+
     ];
 }

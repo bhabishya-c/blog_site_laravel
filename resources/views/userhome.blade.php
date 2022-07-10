@@ -27,7 +27,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/userhome">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/userpostform">Add blog</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/userform">Add blog</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/logout">Logout</a></li>
                     </ul>
                 </div>
@@ -48,27 +48,37 @@
         </header>
         <!-- Main Content-->
         @isset($userdisplay)
-        @foreach($userdisplay as $u)
+        @foreach($userdisplay as $user)
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
+                    @foreach($user->posts as $u)
                     <div class="post-preview">
                     <h2 class="post-title">{{$u->title}}</h2>
                         <div class="container" style="height: 65px;;width:auto;overflow:hidden;">
                         <h3 class="post-subtitle" style="font-weight:lighter;">{{$u->content}}</h3>
                         </div>
-                        <form id="content" action="/usercontent" method="get">
-                            @csrf
-                            <input type="hidden" name="id" value="{{$u->post_id}}">
-                            <input type="submit" class="btn btn-info btn-md" value="Readmore" style="border-radius:50px;"><br>
-                        </form>
                         <p class="post-meta">
-                            Posted on: {{$u->created_at}}
+                            Posted on: {{$u->created_at}} by {{ $user->name }}
                         </p>
+                        @if(Auth::user()->id==$u->user_id)
+                        <form action="/deletepost" method="post" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="id" value="{{$u->id}}">
+                            <input type="submit" class="btn btn-info btn-md" value="Delete" style="border-radius:50px;">
+                            </form>
+                            @endif
+                            <form action="/admincontent" method="get" style="display:inline;">
+                            @csrf
+                            <input type="hidden" name="id" value="{{$u->id}}">
+                            <input type="submit" class="btn btn-info btn-md" value="Readmore" style="border-radius:50px;"><br>
+                            </form>
                     </div>
                      <!-- Divider-->
                     <hr class="my-4" />
+                    @endforeach
 </div>
 </div>
 </div>

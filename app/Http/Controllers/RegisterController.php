@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class RegisterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +23,7 @@ class LoginController extends Controller
      */
     public function create()
     {
-        return view('login');
+        return view('register');
     }
 
     /**
@@ -34,21 +34,18 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        $email=$request->email;
-        $password=$request->password;
-        if(Auth::attempt(['email' => $email, 'password' => $password,'role'=>'admin'])) {
-        $request->session()->regenerate();
-        return redirect('/adminhome');
-    }
-       elseif (Auth::attempt(['email' => $email, 'password' => $password,'role'=>'user'])) {
-       $request->session()->regenerate();
-       return redirect('/userhome');
-    }elseif(Auth::attempt(['email'=>!$email,'password'=>$password])){
-       return redirect('/')->with('emailerror',"Entered email is wrong");
-     }
-     else{
-     return redirect('/')->with('error',"Entered email or password is wrong");
- }
+        $user=User::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password'=>$request->password,
+            'role'=>$request->role,
+          ]);
+          if($user){
+            return redirect()->back()->with('success','User has been created successfully');
+        }
+            else{
+                return redirect()->back()->with('error','Failed to create user');
+            }
     }
 
     /**
