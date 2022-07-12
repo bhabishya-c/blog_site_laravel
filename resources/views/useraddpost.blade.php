@@ -33,19 +33,14 @@
                     @elseif(session()->has('addposterror'))
                     <div class="alert alert-danger">{{session()->get('addposterror') }}</div>
                 @endif
-                
-                @if($errors->any())
-                @foreach($errors->all() as $error)
-                <div class="alert alert-danger" role="alert">
-                {{$error}}
-                </div>
-                @endforeach
-                @endif
                 <input type="hidden" class="textfield form-control" name="id" value="{{Auth::user()->id}}">
                 <label for="title" class="form-label">Title:</label>
-                <input type="text" class="textfield form-control" name="title" placeholder="BLog title..">
+                <input type="text" class="textfield form-control" name="title" placeholder="Blog title..">
+                <div class='alert-danger' >{{$errors->first('title')}}</div>
                 <label for="content" class="form-label">Content:</label>
                 <textarea class="textfield form-control" rows="4" cols="50" name="content" placeholder="Write your blog here.."></textarea>
+                <div class='alert-danger' >{{$errors->first('content')}}</div>
+
 <br>
                 <button name="submit" class="btn btn-primary">Post</button>
 </form>

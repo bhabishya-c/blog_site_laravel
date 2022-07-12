@@ -59,20 +59,21 @@
                         <div class="container" style="height: 65px;;width:auto;overflow:hidden;">
                         <h3 class="post-subtitle" style="font-weight:lighter;">{{$u->content}}</h3>
                         </div>
+                        <br>
                         <p class="post-meta">
                             Posted on: {{$u->created_at}} by {{ $user->name }}
                         </p>
                         @if(Auth::user()->id==$u->user_id)
-                        <form action="/deletepost" method="post" style="display:inline;">
+                        <form action="" method="post" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            {{-- <input type="hidden" name="id" value="{{$u->id}}"> --}}
+                            <input type="hidden" name="id" value="{{$u->id}}">
                             <input type="submit" class="btn btn-info btn-md" value="Delete" style="border-radius:50px;">
                             </form>
                             @endif
-                            <form action="/admincontent" method="get" style="display:inline;">
+                            <form action="" method="get" style="display:inline;">
                             @csrf
-                            {{-- <input type="hidden" name="id" value="{{$u->id}}"> --}}
+                            <input type="hidden" name="id" value="{{$u->id}}">
                             <input type="submit" class="btn btn-info btn-md" value="Readmore" style="border-radius:50px;"><br>
                             </form>
                     </div>

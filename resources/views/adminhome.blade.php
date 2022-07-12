@@ -57,24 +57,25 @@
                     @foreach($admin->posts as $a)
                     <div class="post-preview">
                     <h2 class="post-title">{{$a->title}}</h2>
-                        <div class="container" style="height: 65px;;width:auto;overflow:hidden;">
+                        <div class="container" style="height:65px;;width:auto;overflow:hidden;">
                         <h3 class="post-subtitle" style="font-weight:lighter">{{$a->content}} </h3>
                     </div>
                     </a>
+                    <br>
                         <p class="post-meta">
                             Posted on: {{$a->created_at}} by {{ $admin->name }} 
                         </p>
-                        <form action="/deletepost" method="post" style="display:inline;">
+                        <form action="" method="post" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        {{-- <input type="hidden" name="id" value="{{$a->user_id}}"> --}}
+                        <input type="hidden" name="id" value="{{$a->id}}">
                         <input type="submit" class="btn btn-info btn-md" value="Delete" style="border-radius:50px;">
                         </form>
-                        <form action="/admincontent" method="get" style="display:inline;">
-                        @csrf
-                        {{-- <input type="hidden" name="id" value="{{$a->user_id}}"> --}}
-                        <input type="submit" class="btn btn-info btn-md" value="Readmore" style="border-radius:50px;"><br>
-                        </form>
+                        <form action="" method="get" style="display:inline;">
+                            @csrf
+                            <input type="hidden" name="id" value="{{$a->id}}">
+                            <input type="submit" class="btn btn-info btn-md" value="Readmore" style="border-radius:50px;"><br>
+                            </form>
                     </div>
                      <!-- Divider-->
                     <hr class="my-4" />

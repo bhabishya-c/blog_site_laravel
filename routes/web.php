@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,15 +18,15 @@ use App\Http\Controllers\LoginController;
 
 Route::get('/',[LoginController::class,'create']);
 Route::post('/login',[LoginController::class,'login']);
-Route::post('/login',[LoginController::class,'store']);
 Route::get('/adduserform',[RegisterController::class,'create']);
 Route::post('/adduser',[RegisterController::class,'store']);
 Route::get('/adminform',[PostController::class,'admincreate']);
 Route::get('/userform',[PostController::class,'usercreate']);
+Route::get('/adminhome',[PostController::class,'adminindex']);
+Route::get('/userhome',[PostController::class,'userindex']);
 Route::get('/logout',[LogoutController::class,'logout']);
 Route::post('/adminpost',[PostController::class,'store']);
 Route::post('/userpost',[PostController::class,'store']);
-
 
 
 

@@ -34,19 +34,15 @@
                     <div class="alert alert-danger">{{session()->get('error') }}</div>
                 @endif
                 
-                @if($errors->any())
-                @foreach($errors->all() as $error)
-                <div class="alert alert-danger" role="alert">
-                {{$error}}
-                </div>
-                @endforeach
-                @endif
             <label for="name" class="form-label">Name:</label>
                 <input type="text" class="textfield form-control" name="name" placeholder="Name">
+                <div class='alert-danger' >{{$errors->first('name')}}</div>
                 <label for="email" class="form-label">Email:</label>
                 <input type="text" class="textfield form-control" name="email" placeholder="Email">
+                <div class='alert-danger' >{{$errors->first('email')}}</div>
                 <label for="password" class="form-label">Password:</label>
                 <input type="password" class="textfield form-control" name="password" placeholder="Password">
+                <div class='alert-danger' >{{$errors->first('password')}}</div>
                 <label for="role" class="form-label">Role:</label>
                 <select class="form-select" name="role" aria-label="Default select example">
                 <option >user</option>
