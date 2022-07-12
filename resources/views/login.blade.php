@@ -31,29 +31,9 @@ body {
 <body>
 
     <div id="login">
-    @if($errors->any())
-                @foreach($errors->all() as $error)
-                <div class="alert alert-danger" role="alert">
-                {{$error}}
-                </div>
-                @endforeach
-                @endif
-                
                 @if(session()->has('error'))
                 <div class="alert alert-danger" role="alert">
                 {{session()->get('error')}}
-                </div>
-
-                @endif
-                @if(session()->has('emailerror'))
-                <div class="alert alert-danger" role="alert">
-                {{session()->get('emailerror')}}
-                </div>
-                @endif
-
-                @if(session()->has('passworderror'))
-                <div class="alert alert-danger" role="alert">
-                {{session()->get('passworderror')}}
                 </div>
                 @endif
         <form action="/login" method="post">
@@ -67,10 +47,12 @@ body {
                             <div class="form-group">
                                 <label for="username" class="text-info">Email:</label><br>
                                 <input type="text" name="email" id="email" class="form-control">
+                                <div class='alert-danger' >{{$errors->first('email')}}</div>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-info">Password:</label><br>
                                 <input type="password" name="password" id="password" class="form-control">
+                                <div class='alert-danger' >{{$errors->first('password')}}</div>
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-info btn-md" value="submit"><br>
