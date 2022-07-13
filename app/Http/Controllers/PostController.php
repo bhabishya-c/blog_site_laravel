@@ -55,19 +55,6 @@ class PostController extends Controller
                 return redirect()->back()->with('addposterror','Failed to add post');
             }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show()
-    {
-        $id=request()->id;
-        $content=Post::where('id',$id)->get();
-        return view('adminpostcontent')->with('display',$content);
-    }
     
     /**
      * Remove the specified resource from storage.
