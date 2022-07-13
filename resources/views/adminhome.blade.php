@@ -27,7 +27,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/adminhome">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/adminform">Add blog</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/blogform">Add blog</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/adduserform">Add user</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/logout">Logout</a></li>
                     </ul>
@@ -65,13 +65,13 @@
                         <p class="post-meta">
                             Posted on: {{$a->created_at}} by {{ $admin->name }} 
                         </p>
-                        <form action="" method="post" style="display:inline;">
+                        <form action="/admindeletepost" method="post" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <input type="hidden" name="id" value="{{$a->id}}">
                         <input type="submit" class="btn btn-info btn-md" value="Delete" style="border-radius:50px;">
                         </form>
-                        <form action="" method="get" style="display:inline;">
+                        <form action="/adminblogcontent" method="get" style="display:inline;">
                             @csrf
                             <input type="hidden" name="id" value="{{$a->id}}">
                             <input type="submit" class="btn btn-info btn-md" value="Readmore" style="border-radius:50px;"><br>

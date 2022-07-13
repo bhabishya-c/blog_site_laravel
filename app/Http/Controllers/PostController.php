@@ -31,14 +31,11 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function admincreate()
+    public function create()
     {
-        return view('adminaddpost');
+        return view('addblog');
     }
-    public function usercreate()
-    {
-        return view('useraddpost');
-    }
+  
 
     /**
      * Store a newly created resource in storage.
@@ -66,18 +63,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function adminshow()
+    public function show()
     {
         $id=request()->id;
         $content=Post::where('id',$id)->get();
         return view('adminpostcontent')->with('display',$content);
     }
-    public function usershow()
-    {
-        $id=request()->id;
-        $content=Post::where('id',$id)->get();
-        return view('userpostcontent')->with('display',$content);
-    }
+    
     /**
      * Remove the specified resource from storage.
      *

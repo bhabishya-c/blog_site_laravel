@@ -27,7 +27,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/userhome">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/userform">Add blog</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/blogform">Add blog</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/logout">Logout</a></li>
                     </ul>
                 </div>
@@ -64,14 +64,14 @@
                             Posted on: {{$u->created_at}} by {{ $user->name }}
                         </p>
                         @if(Auth::user()->id==$u->user_id)
-                        <form action="" method="post" style="display:inline;">
+                        <form action="/userdeletepost" method="post" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <input type="hidden" name="id" value="{{$u->id}}">
                             <input type="submit" class="btn btn-info btn-md" value="Delete" style="border-radius:50px;">
                             </form>
                             @endif
-                            <form action="" method="get" style="display:inline;">
+                            <form action="blogcontent" method="get" style="display:inline;">
                             @csrf
                             <input type="hidden" name="id" value="{{$u->id}}">
                             <input type="submit" class="btn btn-info btn-md" value="Readmore" style="border-radius:50px;"><br>

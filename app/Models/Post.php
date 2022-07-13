@@ -14,8 +14,4 @@ class Post extends Model
         'content',
     ];
     public $timestamps=false;
-    // public function comment()
-    // {
-    //     return $this->hasMany(Comment::class);
-    // }
 }

@@ -15,18 +15,17 @@ use App\Http\Controllers\LoginController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/',[LoginController::class,'create']);
 Route::post('/login',[LoginController::class,'login']);
 Route::get('/adduserform',[RegisterController::class,'create']);
 Route::post('/adduser',[RegisterController::class,'store']);
-Route::get('/adminform',[PostController::class,'admincreate']);
-Route::get('/userform',[PostController::class,'usercreate']);
+Route::get('/blogform',[PostController::class,'create']);
 Route::get('/adminhome',[PostController::class,'adminindex']);
 Route::get('/userhome',[PostController::class,'userindex']);
+Route::delete('/admindeletepost',[PostController::class,'admindestroy']);
+Route::delete('/userdeletepost',[PostController::class,'userdestroy']);
 Route::get('/logout',[LogoutController::class,'logout']);
-Route::post('/adminpost',[PostController::class,'store']);
-Route::post('/userpost',[PostController::class,'store']);
+Route::post('/post',[PostController::class,'store']);
 
 
 

@@ -10,23 +10,10 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
         <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="/adminhome">Home</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                    </ul>
-                </div>
-            </div>
-</nav>
         <div class="card" style="width:50%;margin:auto">
   <div class="card-body">
                 <h3>Add Blog</h3>
-            <form action="/adminpost" method="post">
+            <form action="/post" method="post">
                 @csrf
                 @if(session()->has('addpostsuccess'))
                     <div class="alert alert-success">{{session()->get('addpostsuccess') }}</div>
