@@ -24,7 +24,7 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'=>'required|regex:/^[a-zA-ZÑñ\s]+$/',
+            'title' => 'required|unique:posts|max:255',
             'content'=>'required|regex:/^[a-zA-ZÑñ\s]+$/',
         ];
     }

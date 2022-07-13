@@ -23,9 +23,8 @@ Route::post('/login',[LoginController::class,'login']);
 Route::get('/adduserform',[RegisterController::class,'create']);
 Route::post('/adduser',[RegisterController::class,'store']);
 Route::get('/blogform',[PostController::class,'create']);
-Route::get('/adminhome',[PostController::class,'adminindex']);
-Route::get('/userhome',[PostController::class,'userindex']);
-Route::delete('/deletepost',[PostController::class,'destroy']);
+Route::get('/home',[PostController::class,'index']);
+Route::delete('/post',[PostController::class,'destroy']);
 Route::get('/logout',[LogoutController::class,'logout']);
 Route::post('/post',[PostController::class,'store']);
 

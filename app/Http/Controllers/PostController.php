@@ -14,17 +14,17 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function adminindex()
+    public function index(Request $request)
     {
+        $user =$request->user();
         $post=User::with('posts')->get();
+        if($user->role === User::ROLE_ADMIN){
         return view('adminhome')->with('admindisplay',$post);
-    }
-    public function userindex()
-    {
-        $post=User::with('posts')->orderBy('id','desc')->get();
+        }
         return view('userhome')->with('userdisplay',$post);
-    }
 
+    }
+   
     /**
      * Show the form for creating a new resource.
      *
@@ -32,7 +32,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('addblog');
+        return view('blogform');
     }
   
 
