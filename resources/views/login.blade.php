@@ -53,7 +53,6 @@ body {
                                 <label for="password" class="text-info">Password:</label><br>
                                 <input type="password" name="password" id="password" class="form-control">
                                 <div class='alert-danger' >{{$errors->first('password')}}</div>
-
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-info btn-md" value="submit"><br>
