@@ -1,13 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\LoginValidate;
-use App\Http\Middleware\PostValidation;
-use App\Http\Middleware\RegistrationValidation;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\LogoutController;
 
 
 /*
