@@ -64,7 +64,7 @@
                             Posted on: {{$u->created_at}} by {{ $user->name }}
                         </p>
                         @if(Auth::user()->id==$u->user_id)
-                        <form action="/userdeletepost" method="post" style="display:inline;">
+                        <form action="/deletepost" method="post" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <input type="hidden" name="id" value="{{$u->id}}">

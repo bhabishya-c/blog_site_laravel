@@ -65,7 +65,7 @@
                         <p class="post-meta">
                             Posted on: {{$a->created_at}} by {{ $admin->name }} 
                         </p>
-                        <form action="/admindeletepost" method="post" style="display:inline;">
+                        <form action="/deletepost" method="post" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <input type="hidden" name="id" value="{{$a->id}}">

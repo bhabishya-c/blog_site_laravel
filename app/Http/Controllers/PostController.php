@@ -76,16 +76,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function admindestroy()
+    public function destroy()
     {
         $id=request()->id;
         Post::where("id",$id)->delete();
-        return redirect('/adminhome');
+        return redirect()->back();
     }
-    public function userdestroy()
-    {
-        $id=request()->id;
-        Post::where("id",$id)->delete();
-        return redirect('/userhome');
-    }
+    
 }
