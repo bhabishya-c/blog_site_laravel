@@ -44,15 +44,15 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(PostRequest $request)
-    {
+    {    try{
         $addpost=Post::create([
             'user_id'=>$request->id,
             'title'=>$request->title,
             'content'=>$request->content,
             ]);
-            if($addpost){
-                return redirect()->back()->with('addpostsuccess','Post has been added successfully');
-            }else{
+            return redirect()->back()->with('addpostsuccess','Post has been added successfully');
+        }
+        catch (\Exception $e){
                 return redirect()->back()->with('addposterror','Failed to add post');
             }
     }
