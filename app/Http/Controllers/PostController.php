@@ -55,6 +55,14 @@ class PostController extends Controller
                 return redirect()->back()->with('addposterror','Failed to add post');
             }
     }
+    public function show(Request $request){
+        $id=$request->id;
+        $content=Post::with('comment')->find($id);
+        if($content){
+        return view('blogcontent')->with('display',$content);
+        }
+        return view('blogcontent')->with('contenterror','Failed');
+    }
     /**
      * Remove the specified resource from storage.
      *

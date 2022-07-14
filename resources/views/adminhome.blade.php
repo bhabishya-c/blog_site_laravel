@@ -89,7 +89,7 @@
                             <input type="submit" class="btn btn-info btn-md" value="Edit" style="border-radius:50px;">
                             </form>
                             @endif
-                        <form action="" method="get" style="display:inline;">
+                        <form action="/content" method="get" style="display:inline;">
                             @csrf
                             <input type="hidden" name="id" value="{{$a->id}}">
                             <input type="submit" class="btn btn-info btn-md" value="Readmore" style="border-radius:50px;"><br>
