@@ -27,9 +27,9 @@ Route::get('/home',[PostController::class,'index']);
 Route::delete('/post',[PostController::class,'destroy']);
 Route::get('/logout',[LogoutController::class,'logout']);
 Route::post('/post',[PostController::class,'store']);
-Route::get('/content',[PostController::class,'show']);
 Route::get('/edit',[EditController::class,'edit']);
 Route::put('/post',[EditController::class,'update']);
+
 
 
 
