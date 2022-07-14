@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Add BLog Page</title>
+        <title>Edit page</title>
         <head>
   <link  rel="stylesheet" href="style and responsive/style.css">
   <meta charset="utf-8">
@@ -20,21 +20,16 @@
             </nav>
         <div class="card" style="width:50%;margin:auto">
   <div class="card-body">
-                <h3>Add Blog</h3>
+                <h3>Edit Blog</h3>
             <form action="/post" method="post">
                 @csrf
-                @if(session()->has('addpostsuccess'))
-                    <div class="alert alert-success">{{session()->get('addpostsuccess') }}</div>
-                    @elseif(session()->has('addposterror'))
-                    <div class="alert alert-danger">{{session()->get('addposterror') }}</div>
-                @endif
-                
-                <input type="hidden" class="textfield form-control" name="id" value="{{Auth::user()->id}}">
+                @method('PUT')
+                <input type="hidden" class="textfield form-control" name="id" value="{{$edit->id}}">
                 <label for="title" class="form-label">Title:</label>
-                <input type="text" class="textfield form-control" name="title" placeholder="Blog title..">
+                <input type="text" class="textfield form-control" name="title" value="{{ $edit->title }}" placeholder="Blog title..">
                 <div class='alert-danger' >{{$errors->first('title')}}</div>
                 <label for="content" class="form-label">Content:</label>
-                <textarea class="textfield form-control" rows="4" cols="50" name="content" placeholder="Write your blog here.."></textarea>
+                <textarea class="textfield form-control" rows="4" cols="50" name="content" placeholder="Write your blog here..">{{ $edit->content }}</textarea>
                 <div class='alert-danger' >{{$errors->first('content')}}</div>
 <br>
                 <button name="submit" class="btn btn-primary">Post</button>

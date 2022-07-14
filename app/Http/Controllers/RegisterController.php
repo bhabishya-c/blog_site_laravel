@@ -25,17 +25,17 @@ class RegisterController extends Controller
      */
     public function store(RegisterRequest $request)
     {
+        try{
         $user=User::create([
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>$request->password,
             'role'=>$request->role,
           ]);
-          if($user){
-            return redirect()->back()->with('success','User has been created successfully');
+          return redirect()->back()->with('success','User has been created successfully');
         }
-            else{
-                return redirect()->back()->with('error','Failed to create user');
-            }
+        catch (\Exception $e){
+         return redirect()->back()->with('error','Failed to create user');
+        }
     }
 }

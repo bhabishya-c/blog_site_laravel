@@ -51,22 +51,24 @@ class PostController extends Controller
             ]);
             return redirect()->back()->with('addpostsuccess','Post has been added successfully');
         }
-        catch (\Exception $e){
+        catch(\Exception $e){
                 return redirect()->back()->with('addposterror','Failed to add post');
             }
     }
-    
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy(Request $request)
     {
-        $id=request()->id;
-        Post::where("id",$id)->delete();
-        return redirect()->back();
-    }
-    
+        $id=$request->id;
+        $post=Post::find($id);
+        if($post){
+        $post->delete();
+        return redirect()->back(); 
+      }
+        return redirect()->back()->with("deleteerror","Failed to delete post");  
+}
 }

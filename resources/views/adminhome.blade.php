@@ -26,7 +26,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/adminhome">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/home">Home</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/blogform">Add blog</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/adduserform">Add user</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/logout">Logout</a></li>
@@ -47,6 +47,16 @@
                 </div>
             </div>
         </header>
+        @if(session()->has('editsuccess'))
+        <script>alert("{{session()->get('editsuccess') }}")</script>
+        @elseif(session()->has('editerror'))
+        <script>alert("{{session()->get('editerror') }}")</script>
+    @endif
+
+        @if(session()->has('deleteerror'))
+        <script>alert("{{session()->get('deleteerror') }}")</script>
+    @endif
+
         <!-- Main Content-->
         @isset($admindisplay)
         @foreach($admindisplay as $admin)
@@ -71,6 +81,14 @@
                         <input type="hidden" name="id" value="{{$a->id}}">
                         <input type="submit" class="btn btn-info btn-md" value="Delete" style="border-radius:50px;">
                         </form>
+                        @if(Auth::user()->id==$a->user_id)
+                        <form action="/edit" method="get" style="display:inline;">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="id" value="{{$a->id}}">
+                            <input type="submit" class="btn btn-info btn-md" value="Edit" style="border-radius:50px;">
+                            </form>
+                            @endif
                         <form action="" method="get" style="display:inline;">
                             @csrf
                             <input type="hidden" name="id" value="{{$a->id}}">

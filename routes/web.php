@@ -5,7 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
-
+use App\Http\Controllers\EditController;
 
 
 /*
@@ -27,6 +27,10 @@ Route::get('/home',[PostController::class,'index']);
 Route::delete('/post',[PostController::class,'destroy']);
 Route::get('/logout',[LogoutController::class,'logout']);
 Route::post('/post',[PostController::class,'store']);
+Route::get('/content',[PostController::class,'show']);
+Route::get('/edit',[EditController::class,'edit']);
+Route::put('/post',[EditController::class,'update']);
+
 
 
 
