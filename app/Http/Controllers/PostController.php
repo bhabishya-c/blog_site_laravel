@@ -69,6 +69,6 @@ class PostController extends Controller
         $post->delete();
         return redirect()->back(); 
       }
-      return abort(403);
+        return abort(403);
     }
 }
