@@ -69,6 +69,6 @@ class PostController extends Controller
         $post->delete();
         return redirect()->back(); 
       }
-        return redirect()->back()->with("deleteerror","Failed to delete post");  
-}
+      return abort(403);
+    }
 }

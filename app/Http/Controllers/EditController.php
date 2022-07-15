@@ -21,7 +21,8 @@ class EditController extends Controller
         if($edit){
         return view('editform',)->with('edit',$edit);
         }
-        echo "<script>alert('Post doesnot exists')</script>";
+        return abort(403);
+
     }
 
     /**
