@@ -14,7 +14,13 @@ class RegisterController extends Controller
      */
     public function create()
     {
+        try{
+        $this->authorize('create',User::class);
         return view('register');
+        }
+        catch (\Exception $e){
+            return abort(404);
+           }
     }
 
     /**

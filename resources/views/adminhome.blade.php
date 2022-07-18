@@ -81,15 +81,14 @@
                         <input type="hidden" name="id" value="{{$a->id}}">
                         <input type="submit" class="btn btn-info btn-md" value="Delete" style="border-radius:50px;">
                         </form>
-                        @if(Auth::user()->id==$a->user_id)
+                        @if(Auth::user()->id === $a->user_id)
                         <form action="/edit" method="get" style="display:inline;">
                             @csrf
-                            @method('PUT')
                             <input type="hidden" name="id" value="{{$a->id}}">
                             <input type="submit" class="btn btn-info btn-md" value="Edit" style="border-radius:50px;">
                             </form>
-                            @endif
-                        <form action="" method="get" style="display:inline;">
+                        @endif
+                        <form action="/content" method="get" style="display:inline;">
                             @csrf
                             <input type="hidden" name="id" value="{{$a->id}}">
                             <input type="submit" class="btn btn-info btn-md" value="Readmore" style="border-radius:50px;"><br>

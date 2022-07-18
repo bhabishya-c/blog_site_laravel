@@ -6,7 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\EditController;
-
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +27,10 @@ Route::get('/home',[PostController::class,'index']);
 Route::delete('/post',[PostController::class,'destroy']);
 Route::get('/logout',[LogoutController::class,'logout']);
 Route::post('/post',[PostController::class,'store']);
-Route::get('/edit',[EditController::class,'edit']);
-Route::put('/post',[EditController::class,'update']);
+Route::get('/content',[PostController::class,'show']);
+Route::get('/edit',[PostController::class,'edit']);
+Route::put('/post',[PostController::class,'update']);
+Route::post('/comment',[CommentController::class,'store']);
 
 
 

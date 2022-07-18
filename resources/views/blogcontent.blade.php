@@ -19,82 +19,94 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="/home">Blog website</a>
+            <a class="navbar-brand" href="/home">Blog website</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/home">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/blogform">Add blog</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/logout">Logout</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <!-- Page Header-->
-        <header class="masthead">
+        <header class="masthead" style="background-image: url('assets/img/post-bg.jpg')">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="site-heading">
-                            <h1>Welcome</h1>
-                            <span class="subheading">{{Auth::user()->name}}</span>
+                        <div class="post-heading">
+                            <h1>{{$display->title}}</h1>
+                            <span class="meta">
+                                Posted on:{{$display->created_at}}
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
         </header>
-        @if(session()->has('editsuccess'))
-        <script>alert("{{session()->get('editsuccess') }}")</script>
-        @elseif(session()->has('editerror'))
-        <script>alert("{{session()->get('editerror') }}")</script>
-    @endif
-
-    @if(session()->has('deleteerror'))
-    <script>alert("{{session()->get('deleteerror') }}")</script>
-@endif
-
-        <!-- Main Content-->
-        @isset($userdisplay)
-        @foreach($userdisplay as $user)
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    <!-- Post preview-->
-                    @foreach($user->posts as $u)
-                    <div class="post-preview">
-                    <h2 class="post-title">{{$u->title}}</h2>
-                        <div class="container" style="height: 65px;;width:auto;overflow:hidden;">
-                        <h3 class="post-subtitle" style="font-weight:lighter;">{{$u->content}}</h3>
-                        </div>
-                        <br>
-                        <p class="post-meta">
-                            Posted on: {{$u->created_at}} by {{ $user->name }}
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+<p>
+                        {{$display->content}}
                         </p>
-                        @if( Auth::user()->id  ===  $u->user_id )      
-                            <form action="/edit" method="get" style="display:inline;">
-                                @csrf
-                                <input type="hidden" name="id" value="{{$u->id}}">
-                                <input type="submit" class="btn btn-info btn-md" value="Edit" style="border-radius:50px;">
-                                </form>
-                        @endif
-                            <form action="/content" method="get" style="display:inline;">
-                            @csrf
-                            <input type="hidden" name="id" value="{{$u->id}}">
-                            <input type="submit" class="btn btn-info btn-md" value="Readmore" style="border-radius:50px;"><br>
-                            </form>
                     </div>
-                     <!-- Divider-->
-                    <hr class="my-4" />
-                    @endforeach
-</div>
-</div>
-</div>
-@endforeach
-@endisset
-                   
+                </div>
+            </div>
+        </article>
+                      
+   <!-- Divider-->
+   <hr class="my-4" />
+  
+  
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h2>All comments</h2><br>
+                        
+                     @foreach($display->comment as $c)
+                        {{ $c->comment }}
+                        <hr class="my-4" />
+                     @endforeach
+                     
+                    </div>
+                </div>
+            </div>            
+   <!-- Divider-->
+   <hr class="my-4" />
+<section> 
+  <div class="container my-5 py-5 text-dark">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-6">
+        <div class="card" style="border-radius:10px;">
+          <div class="card-body p-4">
+            <div class="d-flex flex-start w-100">
+              <div class="w-100">
+                <h5>Add a comment</h5>
+                @if(session()->has('commenterror'))
+                <div class="alert alert-danger" role="alert">
+                    {{session()->get('commenterror')}}
+                    </div>
+                @endif
+                <form action="/comment" method="post">
+                    @csrf
+                  <input type="hidden" name="id" value="{{$display->id}}">
+                  <textarea class="form-control" name="comment" id="textAreaExample" rows="4", placeholder="Enter your comment..."></textarea>
+                  <div class='alert-danger' >{{$errors->first('comment')}}</div>
+                  <label class="form-label" for="textAreaExample">What is your view?</label><br>
+                  <input type="submit" class="btn btn-info btn-md" value="Comment" style="border-radius:50px;">
+               </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
         <!-- Footer-->
         <footer class="border-top">
             <div class="container px-4 px-lg-5">
@@ -113,7 +125,7 @@
                                 <a href="#!">
                                     <span class="fa-stack fa-lg">
                                         <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-instagram -f fa-stack-1x fa-inverse"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
                                     </span>
                                 </a>
                             </li>
@@ -126,7 +138,7 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="small text-center text-muted fst-italic">Copyright &copy; Bhabishya Chaudhary 2022</div>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2022</div>
                     </div>
                 </div>
             </div>
