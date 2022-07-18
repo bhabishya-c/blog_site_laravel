@@ -21,7 +21,7 @@ class EditController extends Controller
         if($edit){
         return view('editform',)->with('edit',$edit);
         }
-        return abort(403);
+        return abort(404);
 
     }
 
