@@ -93,12 +93,11 @@
                 <form action="/comment" method="post">
                     @csrf
                   <input type="hidden" name="id" value="{{$display->id}}">
-                  <textarea class="form-control" name="comment" id="textAreaExample" rows="4"></textarea>
+                  <textarea class="form-control" name="comment" id="textAreaExample" rows="4", placeholder="Enter your comment..."></textarea>
                   <div class='alert-danger' >{{$errors->first('comment')}}</div>
                   <label class="form-label" for="textAreaExample">What is your view?</label><br>
                   <input type="submit" class="btn btn-info btn-md" value="Comment" style="border-radius:50px;">
                </form>
-              
               </div>
             </div>
           </div>

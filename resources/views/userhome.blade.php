@@ -73,19 +73,13 @@
                         <p class="post-meta">
                             Posted on: {{$u->created_at}} by {{ $user->name }}
                         </p>
-                        @if(Auth::user()->id==$u->user_id)
-                        <form action="/post" method="post" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <input type="hidden" name="id" value="{{$u->id}}">
-                            <input type="submit" class="btn btn-info btn-md" value="Delete" style="border-radius:50px;">
-                            </form>
+                        @if( Auth::user()->id  ===  $u->user_id )      
                             <form action="/edit" method="get" style="display:inline;">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$u->id}}">
                                 <input type="submit" class="btn btn-info btn-md" value="Edit" style="border-radius:50px;">
                                 </form>
-                            @endif
+                        @endif
                             <form action="/content" method="get" style="display:inline;">
                             @csrf
                             <input type="hidden" name="id" value="{{$u->id}}">
