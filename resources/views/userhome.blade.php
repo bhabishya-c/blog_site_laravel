@@ -19,15 +19,15 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="">Blog website</a>
+                <a class="navbar-brand" href="/home">Blog website</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/userhome">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/userform">Add blog</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/blogform">Add blog</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/logout">Logout</a></li>
                     </ul>
                 </div>
@@ -46,6 +46,16 @@
                 </div>
             </div>
         </header>
+        @if(session()->has('editsuccess'))
+        <script>alert("{{session()->get('editsuccess') }}")</script>
+        @elseif(session()->has('editerror'))
+        <script>alert("{{session()->get('editerror') }}")</script>
+    @endif
+
+    @if(session()->has('deleteerror'))
+    <script>alert("{{session()->get('deleteerror') }}")</script>
+@endif
+
         <!-- Main Content-->
         @isset($userdisplay)
         @foreach($userdisplay as $user)
@@ -59,18 +69,24 @@
                         <div class="container" style="height: 65px;;width:auto;overflow:hidden;">
                         <h3 class="post-subtitle" style="font-weight:lighter;">{{$u->content}}</h3>
                         </div>
+                        <br>
                         <p class="post-meta">
                             Posted on: {{$u->created_at}} by {{ $user->name }}
                         </p>
                         @if(Auth::user()->id==$u->user_id)
-                        <form action="/deletepost" method="post" style="display:inline;">
+                        <form action="/post" method="post" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <input type="hidden" name="id" value="{{$u->id}}">
                             <input type="submit" class="btn btn-info btn-md" value="Delete" style="border-radius:50px;">
                             </form>
+                            <form action="/edit" method="get" style="display:inline;">
+                                @csrf
+                                <input type="hidden" name="id" value="{{$u->id}}">
+                                <input type="submit" class="btn btn-info btn-md" value="Edit" style="border-radius:50px;">
+                                </form>
                             @endif
-                            <form action="/admincontent" method="get" style="display:inline;">
+                            <form action="" method="get" style="display:inline;">
                             @csrf
                             <input type="hidden" name="id" value="{{$u->id}}">
                             <input type="submit" class="btn btn-info btn-md" value="Readmore" style="border-radius:50px;"><br>

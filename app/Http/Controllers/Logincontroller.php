@@ -17,10 +17,10 @@ class LoginController extends Controller
         $email=$request->email;
         $password=$request->password;
         if(Auth::attempt(['email' => $email, 'password' => $password,'role'=>'admin'])) {
-        return view('adminhome');
+        return redirect('/home');
     }
        if (Auth::attempt(['email' => $email, 'password' => $password,'role'=>'user'])) {
-       return view('userhome');
+       return redirect('/home');
        }
        else{
         return redirect('/')->with('error',"Entered email or password is wrong");
